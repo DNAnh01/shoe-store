@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from store_app.models import Product
+from store_app.models import Product, Categories, Filter_Price, Color, Brand
 
 
 def BASE(request):
@@ -16,9 +16,17 @@ def HOME(request):
 
 def PRODUCT(request):
     product = Product.objects.filter(status='Publish')
+    categories = Categories.objects.all()
+    filter_price = Filter_Price.objects.all()
+    color = Color.objects.all()
+    brand = Brand.objects.all()
 
     context = {
-        'product': product
+        'product': product,
+        'categories': categories,
+        'filter_price': filter_price,
+        'color': color,
+        'brand': brand,
     }
 
     return render(request, 'Main/product.html', context)
