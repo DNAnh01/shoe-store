@@ -159,9 +159,9 @@
                         <h4 class="sidebar-title">Top Categories</h4>
                         <div class="sidebar-widget-category">
                             <ul>
-                                <li><a href="#" class="selected m-0"> All</a></li>
+                                <li><a href="/products/" class="selected m-0"> All Products</a></li>
                                 {% for cat in categories %}
-                                <li><a href="#" class="selected m-0"> {{ cat.name | truncatewords:3}}</a></li>
+                                <li><a href="/products/?categories={{ cat.id }}" class="selected m-0"> {{ cat.name | truncatewords:3}}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

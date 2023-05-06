@@ -21,6 +21,12 @@ def PRODUCT(request):
     color = Color.objects.all()
     brand = Brand.objects.all()
 
+    CATID = request.GET.get('categories')
+    if CATID:
+        product = Product.objects.filter(categories = CATID)
+    else:
+        product = Product.objects.filter(status='Publish')
+
     context = {
         'product': product,
         'categories': categories,
