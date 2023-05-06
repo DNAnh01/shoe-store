@@ -184,7 +184,7 @@
                         <div class="sidebar-widget-color">
                             <ul class="d-flex flex-wrap">
                                 {% for col in color %}
-                                <li><a href="#" style="background-color:{{ col.code }}"></a></li>
+                                <li><a href="/products/?color={{ col.id }}" style="background-color:{{ col.code }}"></a></li>
                                 {% endfor %}
                             </ul>
                         </div>
