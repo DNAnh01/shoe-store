@@ -21,11 +21,16 @@ class Color(models.Model):
 
 class Filter_Price(models.Model):
     FILTER_PRICE = (
-        ('1000 TO 10000', '1000 TO 10000'),
-        ('10000 TO 20000', '10000 TO 20000'),
-        ('20000 TO 30000', '20000 TO 30000'),
-        ('30000 TO 40000', '30000 TO 40000'),
-        ('40000 TO 50000', '40000 TO 50000')
+        ('1 TO 10', '1 TO 10'),
+        ('10 TO 20', '10 TO 20'),
+        ('20 TO 30', '20 TO 30'),
+        ('30 TO 40', '30 TO 40'),
+        ('40 TO 50', '40 TO 50'),
+        ('50 TO 60', '50 TO 60'),
+        ('60 TO 70', '60 TO 70'),
+        ('70 TO 80', '70 TO 80'),
+        ('80 TO 90', '80 TO 90'),
+        ('90 TO 100', '90 TO 100')
     )
     price = models.CharField(choices=FILTER_PRICE, max_length=60)
     def __str__(self):
