@@ -172,7 +172,7 @@
                         <div class="price-filter">
                             <div class="price-slider-amount">
                                 {% for f_price in filter_price %}
-                                <li><a href="#" class="selected m-0"> {{ f_price.price | truncatewords:3}}</a></li>
+                                <li><a href="/products/?filter_price={{ f_price.id }}" class="selected m-0"> {{ f_price.price }}</a></li>
                                 {% endfor %}
                             </div>
                     

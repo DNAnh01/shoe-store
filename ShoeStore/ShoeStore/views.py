@@ -15,15 +15,18 @@ def HOME(request):
     return render(request, 'Main/Index.html', context)
 
 def PRODUCT(request):
-    product = Product.objects.filter(status='Publish')
     categories = Categories.objects.all()
     filter_price = Filter_Price.objects.all()
     color = Color.objects.all()
     brand = Brand.objects.all()
 
     CATID = request.GET.get('categories')
+    PRICE_FILTER_ID = request.GET.get('filter_price')
+    # print(PRICE_FILTER_ID)
     if CATID:
-        product = Product.objects.filter(categories = CATID)
+        product = Product.objects.filter(categories = CATID, status='Publish')
+    elif PRICE_FILTER_ID:
+        product = Product.objects.filter(filter_price = PRICE_FILTER_ID, status='Publish')
     else:
         product = Product.objects.filter(status='Publish')
 
