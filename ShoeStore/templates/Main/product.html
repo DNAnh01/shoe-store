@@ -212,9 +212,9 @@
                         <h4 class="sidebar-title">Brands</h4>
                         <div class="sidebar-widget-brand">
                             <ul>
-                                <li><a href="#" class="selected m-0"> All Brand</a></li>
+                                <li><a href="/products/" class="selected m-0"> All Brand</a></li>
                                 {% for br in brand %}
-                                <li><a href="#" class="">{{ br.name | truncatewords:3}}</a></li>
+                                <li><a href="/products/?brand={{br.id}}" class="">{{ br.name | truncatewords:3}}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

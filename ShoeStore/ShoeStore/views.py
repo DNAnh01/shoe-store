@@ -22,8 +22,8 @@ def PRODUCT(request):
 
     CATID = request.GET.get('categories')
     PRICE_FILTER_ID = request.GET.get('filter_price')
-    # print(PRICE_FILTER_ID)
     COLOR_ID = request.GET.get('color')
+    BRANDID = request.GET.get('brand')
 
     if CATID:
         product = Product.objects.filter(categories = CATID, status='Publish')
@@ -31,6 +31,8 @@ def PRODUCT(request):
         product = Product.objects.filter(filter_price = PRICE_FILTER_ID, status='Publish')
     elif COLOR_ID:
         product = Product.objects.filter(color = COLOR_ID, status='Publish')
+    elif BRANDID:
+        product = Product.objects.filter(brand = BRANDID, status='Publish')
     else:
         product = Product.objects.filter(status='Publish')
 
