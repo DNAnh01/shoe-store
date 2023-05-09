@@ -28,12 +28,12 @@
                         <div class="header-bottom-set dropdown">
                             <button class="dropdown-toggle header-action-btn" data-bs-toggle="dropdown">Default <i class="fa fa-angle-down"></i></button>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a class="dropdown-item" href="/products/{% for i in product %}?ATOZ={{i.id}} {% endfor %}">Name, A to Z</a></li>
-                                <li><a class="dropdown-item" href="/products/{% for i in product %}?ZTOA={{i.id}} {% endfor %}">Name, Z to A</a></li>
+                                <li><a class="dropdown-item" href="/products/{% for i in product %}?ATOZ={{i.id}}{% endfor %}">Name, A to Z</a></li>
+                                <li><a class="dropdown-item" href="/products/{% for i in product %}?ZTOA={{i.id}}{% endfor %}">Name, Z to A</a></li>
                                 <li><a class="dropdown-item" href="/products/{% for i in product %}?PRICE_LOWTOHIGH={{i.id}}{% endfor %}">Price, low to high</a></li>
                                 <li><a class="dropdown-item" href="/products/{% for i in product %}?PRICE_HIGHTOLOW={{i.id}}{% endfor %}">Price, high to low</a></li>
-                                <li><a class="dropdown-item" href="#">Sort By new</a></li>
-                                <li><a class="dropdown-item" href="#">Sort By old</a></li>
+                                <li><a class="dropdown-item" href="/products/{% for i in product %}?NEW_PRODUCT={{i.id}}{% endfor %}">Sort By new</a></li>
+                                <li><a class="dropdown-item" href="/products/{% for i in product %}?OLD_PRODUCT={{i.id}}{% endfor %}">Sort By old</a></li>
                             </ul>
                         </div>
                         <!-- Single Wedge Start -->

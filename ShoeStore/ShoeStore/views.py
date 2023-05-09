@@ -31,6 +31,9 @@ def PRODUCT(request):
     PRICE_LOWTOHIGHID = request.GET.get('PRICE_LOWTOHIGH') 
     PRICE_HIGHTOLOWID = request.GET.get('PRICE_HIGHTOLOW')
 
+    NEW_PRODUCTID = request.GET.get('NEW_PRODUCT')
+    OLD_PRODUCTID = request.GET.get('OLD_PRODUCT')
+
     if CATID:
         product = Product.objects.filter(categories = CATID, status='Publish')
     elif PRICE_FILTER_ID:
@@ -47,6 +50,10 @@ def PRODUCT(request):
         product = Product.objects.filter(status='Publish').order_by('price')
     elif PRICE_HIGHTOLOWID:
         product = Product.objects.filter(status='Publish').order_by('-price')
+    elif NEW_PRODUCTID:
+        product = Product.objects.filter(status='Publish', condition='New').order_by('-id')
+    elif OLD_PRODUCTID:
+        product = Product.objects.filter(status='Publish', condition='Old').order_by('-id')
     else:
         product = Product.objects.filter(status='Publish')
 
