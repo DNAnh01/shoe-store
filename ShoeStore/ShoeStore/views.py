@@ -25,6 +25,12 @@ def PRODUCT(request):
     COLOR_ID = request.GET.get('color')
     BRANDID = request.GET.get('brand')
 
+    ATOZID = request.GET.get('ATOZ')
+    ZTOAID = request.GET.get('ZTOA')
+
+    PRICE_LOWTOHIGHID = request.GET.get('PRICE_LOWTOHIGH') 
+    PRICE_HIGHTOLOWID = request.GET.get('PRICE_HIGHTOLOW')
+
     if CATID:
         product = Product.objects.filter(categories = CATID, status='Publish')
     elif PRICE_FILTER_ID:
@@ -33,6 +39,14 @@ def PRODUCT(request):
         product = Product.objects.filter(color = COLOR_ID, status='Publish')
     elif BRANDID:
         product = Product.objects.filter(brand = BRANDID, status='Publish')
+    elif ATOZID:
+        product = Product.objects.filter(status='Publish').order_by('name')
+    elif ZTOAID:
+        product = Product.objects.filter(status='Publish').order_by('-name')
+    elif PRICE_LOWTOHIGHID:
+        product = Product.objects.filter(status='Publish').order_by('price')
+    elif PRICE_HIGHTOLOWID:
+        product = Product.objects.filter(status='Publish').order_by('-price')
     else:
         product = Product.objects.filter(status='Publish')
 
