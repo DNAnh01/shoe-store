@@ -1005,10 +1005,14 @@
       </div>
       <!-- Footer Area End -->
     </div>
+    
+    
     <!-- Modal -->
+
+  {% for i in product %}
     <div
       class="modal modal-2 fade"
-      id="exampleModal"
+      id="exampleModal-{{forloop.counter}}"
       tabindex="-1"
       role="dialog"
     >
@@ -1030,82 +1034,30 @@
                 <!-- Swiper -->
                 <div class="swiper-container gallery-top">
                   <div class="swiper-wrapper">
+                    {% for img in i.images_set.all %}
                     <div class="swiper-slide">
                       <img
                         class="img-responsive m-auto"
-                        src="assets/images/product-image/zoom-image/1.webp"
+                        src="/{{img.image}}"
                         alt=""
                       />
                     </div>
-                    <div class="swiper-slide">
-                      <img
-                        class="img-responsive m-auto"
-                        src="assets/images/product-image/zoom-image/2.webp"
-                        alt=""
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        class="img-responsive m-auto"
-                        src="assets/images/product-image/zoom-image/3.webp"
-                        alt=""
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        class="img-responsive m-auto"
-                        src="assets/images/product-image/zoom-image/4.webp"
-                        alt=""
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        class="img-responsive m-auto"
-                        src="assets/images/product-image/zoom-image/5.webp"
-                        alt=""
-                      />
-                    </div>
+                    {% endfor %}
                   </div>
                 </div>
                 <div
                   class="swiper-container gallery-thumbs mt-20px slider-nav-style-1 small-nav"
                 >
                   <div class="swiper-wrapper">
+                    {% for img in i.images_set.all %}
                     <div class="swiper-slide">
                       <img
                         class="img-responsive m-auto"
-                        src="assets/images/product-image/small-image/1.webp"
+                        src="/{{img.image}}"
                         alt=""
                       />
                     </div>
-                    <div class="swiper-slide">
-                      <img
-                        class="img-responsive m-auto"
-                        src="assets/images/product-image/small-image/2.webp"
-                        alt=""
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        class="img-responsive m-auto"
-                        src="assets/images/product-image/small-image/3.webp"
-                        alt=""
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        class="img-responsive m-auto"
-                        src="assets/images/product-image/small-image/4.webp"
-                        alt=""
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        class="img-responsive m-auto"
-                        src="assets/images/product-image/small-image/5.webp"
-                        alt=""
-                      />
-                    </div>
+                    {% endfor %}
                   </div>
                   <!-- Add Arrows -->
                   <div class="swiper-buttons">
@@ -1120,10 +1072,10 @@
                 data-aos-delay="200"
               >
                 <div class="product-details-content quickview-content">
-                  <h2>Modern Smart Phone</h2>
+                  <h2>{{ i.name | truncatewords:10}}</h2>
                   <div class="pricing-meta">
                     <ul class="d-flex">
-                      <li class="new-price">$20.90</li>
+                      <li class="new-price">${{i.price}}</li>
                     </ul>
                   </div>
                   <div class="pro-details-rating-wrap">
@@ -1139,11 +1091,7 @@
                     >
                   </div>
                   <p class="mt-30px">
-                    Lorem ipsum dolor sit amet, consecte adipisicing elit, sed
-                    do eiusmll tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad mill veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip exet commodo consequat. Duis
-                    aute irure dolor
+                    {{i.description | truncatewords:50}}
                   </p>
                   <div
                     class="pro-details-categories-info pro-details-same-style d-flex m-0"
@@ -1161,10 +1109,7 @@
                     <span>Categories: </span>
                     <ul class="d-flex">
                       <li>
-                        <a href="#">Smart Device, </a>
-                      </li>
-                      <li>
-                        <a href="#">ETC</a>
+                        <a href="#">{{i.categories}}</a>
                       </li>
                     </ul>
                   </div>
@@ -1174,10 +1119,9 @@
                     <span>Tags: </span>
                     <ul class="d-flex">
                       <li>
-                        <a href="#">Smart Device, </a>
-                      </li>
-                      <li>
-                        <a href="#">Phone</a>
+                        {% for tag in i.tag_set.all %}
+                        <a href="#">{{ tag.name }}</a>
+                        {% endfor %}
                       </li>
                     </ul>
                   </div>
@@ -1211,6 +1155,8 @@
         </div>
       </div>
     </div>
+
+    {% endfor %}
     <!-- Modal end -->
     <!-- Modal Cart -->
     <div
