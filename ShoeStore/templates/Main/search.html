@@ -3,6 +3,13 @@
 {% block content %}
 
 <!-- Shop Page Start  -->
+<div class="container">
+    <br>
+    <h2>Search Result: </h2>
+    {% if product|length < 1%}
+    <p>No Product Found</p>
+   {% endif %} 
+</div>
 <div class="shop-category-area pt-100px pb-100px">
     <div class="container">
         <div class="row">
