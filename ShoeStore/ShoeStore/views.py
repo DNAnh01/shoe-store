@@ -161,3 +161,6 @@ def HandleLogout(request):
     logout(request)
     # redirect('home')
     return redirect('home')
+
+def CART(request):
+    return render(request, 'Cart/cart_details.html')
