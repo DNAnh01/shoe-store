@@ -14,5 +14,6 @@ urlpatterns = [
     path('search/', views.SEARCH, name='search'),
     path('contact/', views.CONTACT_PAGE, name='contact'),
     # path('authentication/', views.AUTH, name='auth'),
-    path('register/', views.HandleRegister, name='register')
+    path('register/', views.HandleRegister, name='register'),
+    path('login/', views.HandleLogin, name='login'),
 ] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

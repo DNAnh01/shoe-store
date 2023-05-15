@@ -3,6 +3,8 @@ from store_app.models import Product, Categories, Filter_Price, Color, Brand, Ta
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User 
+from django.contrib.auth import authenticate, login, logout
+
 
 
 def BASE(request):
@@ -137,5 +139,20 @@ def HandleRegister(request):
         customer.last_name = last_name
         customer.save()
         return redirect('home')
+
+    return render(request, 'Registration/auth.html')
+
+def HandleLogin(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        # print(username, password)
+        user = authenticate(username=username,password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+            # 12345 12345
+        else:
+            return redirect('login')
 
     return render(request, 'Registration/auth.html')
