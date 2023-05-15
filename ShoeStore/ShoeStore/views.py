@@ -18,7 +18,7 @@ def HOME(request):
         'product': product
     }
 
-    return render(request, 'Main/Index.html', context)
+    return render(request, 'Main/index.html', context)
 
 def PRODUCT(request):
     categories = Categories.objects.all()
