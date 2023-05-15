@@ -1,6 +1,32 @@
 {% extends 'Main/base.html' %}
 
 {% block content %}
+
+{% if request.session.cart|length < 1 %}
+
+<!-- Empty Cart area start -->
+<div class="empty-cart-area pb-100px pt-100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-heading">
+                    <h2>Your cart item</h2>
+                </div>
+                <div class="empty-text-contant text-center">
+                    <i class="pe-7s-shopbag"></i>
+                    <h3>There are no more items in your cart</h3>
+                    <a class="empty-cart-btn" href="{% url 'products' %}">
+                        <i class="fa fa-arrow-left"> </i> Continue shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Empty Cart area end -->
+
+{% else %}
+
 {% load cart_tag %}
 <!-- Cart Area Start -->
 <div class="cart-main-area pt-100px pb-100px">
@@ -146,5 +172,5 @@
     </div>
 </div>
 <!-- Cart Area End -->
-
+{% endif %}
 {% endblock content %}
