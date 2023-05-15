@@ -219,6 +219,11 @@ def PLACE_ORDER(request):
         uid = request.session.get('_auth_user_id')
         user = User.objects.get(id = uid)
         # print(user)
+        cart = request.session.get('cart')
+        # print(cart)
+        '''
+        {'3': {'userid': 4, 'product_id': 3, 'name': 'Under Armour mens Charged Assert 9 Running Shoe, Black (003 Black, 9.5 US)', 'quantity': 2, 'price': '67', 'image': '/Product_images/img/download_1_5C5FXsO.jpg'}, '4': {'userid': 4, 'product_id': 4, 'name': "Skechers Men's Energy Afterburn Shoes Lace-Up Sneaker", 'quantity': 3, 'price': '42', 'image': '/Product_images/img/download_5_cxj6fIW.jpg'}}
+        '''
         firstname = request.POST.get('firstname')
         lastname = request.POST.get('lastname')
         country = request.POST.get('country')
@@ -229,7 +234,7 @@ def PLACE_ORDER(request):
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         amount = request.POST.get('amount')
-        print(amount)
+        # print(amount)
         # print(firstname, lastname, country, address, city, state, postcode, phone, email)
         order = Order(
             user=user,
@@ -245,4 +250,18 @@ def PLACE_ORDER(request):
             amount=amount,
         )
         order.save()
-    return render(request, 'Cart/placeorder.html')
+        for i in cart:
+            a = (int(cart[i]['price']))
+            b = cart[i]['quantity']
+            total = a*b
+            # print("----------------------", total)
+            item = OrderItem(
+                order=order,
+                product=cart[i]['name'],
+                image=cart[i]['image'],
+                quantity=cart[i]['quantity'],
+                price=cart[i]['price'],
+                total = total
+            )
+            item.save()
+        return render(request, 'Cart/placeorder.html')
