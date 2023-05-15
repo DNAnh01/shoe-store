@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from store_app.models import Product, Categories, Filter_Price, Color, Brand, Tag, Contact_us
+from store_app.models import Product, Categories, Filter_Price, Color, Brand, Tag, Contact_us, Order, OrderItem
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User 
@@ -216,7 +216,33 @@ def Check_out(request):
 
 def PLACE_ORDER(request):
     if request.method == "POST":
+        uid = request.session.get('_auth_user_id')
+        user = User.objects.get(id = uid)
+        # print(user)
         firstname = request.POST.get('firstname')
-
-        print(firstname)
+        lastname = request.POST.get('lastname')
+        country = request.POST.get('country')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        postcode = request.POST.get('postcode')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        amount = request.POST.get('amount')
+        print(amount)
+        # print(firstname, lastname, country, address, city, state, postcode, phone, email)
+        order = Order(
+            user=user,
+            firstname=firstname,
+            lastname=lastname,
+            country=country,
+            city=city,
+            address=address,
+            state=state,
+            postcode=postcode,
+            phone=phone,
+            email=email,
+            amount=amount,
+        )
+        order.save()
     return render(request, 'Cart/placeorder.html')
