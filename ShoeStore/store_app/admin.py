@@ -18,6 +18,8 @@ class OrderItemTubleinline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemTubleinline]
+    list_display = ['firstname','lastname','phone', 'email', 'date']
+    search_fields = ['firstname', 'lastname', 'email']
 
 admin.site.register(Images)
 admin.site.register(Tag)

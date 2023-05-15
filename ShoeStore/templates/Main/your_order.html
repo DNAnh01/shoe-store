@@ -1,11 +1,11 @@
 {% extends 'Main/base.html' %}
 
 {% block content %}
-{% load cart_tag %}
+
 <!-- Cart Area Start -->
 <div class="cart-main-area pt-100px pb-100px">
     <div class="container">
-        <h3 class="cart-page-title">Your Order</h3>
+        <h3 class="cart-page-title">Your order items</h3>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <form action="#">
@@ -18,31 +18,29 @@
                                     <th>Until Price</th>
                                     <th>Qty</th>
                                     <th>Subtotal</th>
-                                    {% comment %} <th>Action</th> {% endcomment %}
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for key,value in request.session.cart.items %}
+                                {% for i in order %}
                                 <tr>
                                     <td class="product-thumbnail">
-                                        <a href="#"><img class="img-responsive ml-15px" src="{{value.image}}" alt="" /></a>
+                                        <a href="#"><img class="img-responsive ml-15px" src="{{i.image}}" alt="" /></a>
                                     </td>
-                                    <td class="product-name"><a href="#">{{value.name | truncatewords:4}}</a></td>
-                                    <td class="product-price-cart"><span class="amount">${{value.price}}</span></td>
+                                    <td class="product-name"><a href="#">{{i.product | truncatewords:4}}</a></td>
+                                    <td class="product-price-cart"><span class="amount">${{i.price}}</span></td>
                                     <td class="product-quantity">
-
-                                        {% comment %} <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="{{value.quantity}} " />
-                                        </div> {% endcomment %}
-                                        <div class="cart_quantity_button">
-                                            <a>{{value.quantity}}</a>
+                                        <div class="cart">
+                                            {{i.quantity}}
                                         </div>
                                     </td>
-                                    <td class="product-subtotal">${{ value.price|multiply:value.quantity }}</td>
-                                    
+                                    <td class="product-subtotal">${{i.total}}</td>
+                                    <td class="product-remove">
+                                        
+                                        <a href="#"><i class="fa fa-times"></i></a>
+                                    </td>
                                 </tr>
                                 {% endfor %}
-                                <tfoot></tfoot>
                             </tbody>
                         </table>
                     </div>
@@ -50,9 +48,12 @@
                         <div class="col-lg-12">
                             <div class="cart-shiping-update-wrapper">
                                 <div class="cart-shiping-update">
-                                    <a href="{% url 'success' %}">Place Order</a>
+                                    <a href="#">Continue Shopping</a>
                                 </div>
-                                
+                                <div class="cart-clear">
+                                    <button>Update Shopping Cart</button>
+                                    <a href="#">Clear Shopping Cart</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,6 +66,3 @@
 <!-- Cart Area End -->
 
 {% endblock content %}
-
-
-

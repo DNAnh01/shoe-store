@@ -580,9 +580,13 @@
               <a href="{% url 'cart_detail' %}" class="btn btn-dark btn-hover-primary mb-30px"
                 >view cart</a
               >
-              <a href="{% url 'checkout' %}" class="btn btn-outline-dark current-btn"
-                >checkout</a
-              >
+              <form method="post" action="{% url 'checkout' %}">  
+                {% csrf_token %}
+                <input value="{{cart_total_amount}}" name="amount" hidden>
+                <a class="btn btn-outline-dark current-btn"
+                  ><button type="submit" class="text-light">checkout</button></a
+                >
+              </form>
             </div>
           </div>
         </div>

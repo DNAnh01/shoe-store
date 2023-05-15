@@ -211,6 +211,8 @@ def cart_detail(request):
 
 
 def Check_out(request):
+    amount = request.POST.get("amount")
+    print(amount)
     return render(request, 'Cart/checkout.html')
 
 
@@ -256,6 +258,7 @@ def PLACE_ORDER(request):
             total = a*b
             # print("----------------------", total)
             item = OrderItem(
+                user=user,
                 order=order,
                 product=cart[i]['name'],
                 image=cart[i]['image'],
@@ -269,3 +272,15 @@ def PLACE_ORDER(request):
 
 def success(request):
     return render(request, 'Cart/thank_you.html')
+
+def Your_Order(request):
+    uid = request.session.get('_auth_user_id')
+    user = User.objects.get(id = uid)
+
+    # print(user)
+    order = OrderItem.objects.filter(user=user)
+    # print(order)
+    context = {
+        'order': order
+    }
+    return render(request, 'Main/your_order.html', context)
