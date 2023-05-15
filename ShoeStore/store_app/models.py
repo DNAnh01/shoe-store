@@ -1,6 +1,11 @@
 from django.db import models
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
+
+
+
+
 # Create your models here.
 
 
@@ -84,3 +89,33 @@ class Contact_us(models.Model):
 
     def __str__(self):
         return self.email
+    
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    contry = models.CharField(max_length=100)
+    address = models.TextField()
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    postcode = models.IntegerField()
+    phone = models.IntegerField()
+    email = models.EmailField(max_length=100) 
+    additional_info = models.TextField()
+    amount = models.CharField(max_length=100)
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
+    
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.CharField(max_length=200)
+    image = models.ImageField(upload_to="Product_images/Order_Img")
+    quantity = models.CharField(max_length=20)
+    price = models.CharField(max_length=50)
+    total = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.order.user.username
+    
