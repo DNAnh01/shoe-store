@@ -53,7 +53,7 @@
                         </div>
                         <span class="read-review"><a class="reviews" href="#">(5 Customer Review)</a></span>
                     </div>
-                    <p class="mt-30px">{{prod.description | truncatewords:30}}</p>
+                    <p class="mt-30px">{{prod.description | truncatewords:30 | safe}}</p>
                     <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                         <span>SKU:</span>
                         <ul class="d-flex">
@@ -108,7 +108,7 @@
                         <div id="des-details2" class="tab-pane">
                             <div class="product-anotherinfo-wrapper text-start">
                                 <ul>
-                                    <li>{{prod.information}}</li>
+                                    <li>{{prod.information | safe}}</li>
 
                                 </ul>
                             </div>
@@ -116,7 +116,7 @@
                         <div id="des-details1" class="tab-pane active">
                             <div class="product-description-wrapper">
                                 <p>
-                                    {{prod.description}}
+                                    {{prod.description | safe}}
                                 </p>
                             </div>
                         </div>
