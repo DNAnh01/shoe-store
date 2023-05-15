@@ -69,6 +69,11 @@
                         ><i class="fa fa-user"></i> Account</a
                       >
                     </li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-unlock"></i>Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}"><i class="fa fa-lock"></i>Login</a></li>
+                    {% endif %}
                   </ul>
                 </div>
               </div>

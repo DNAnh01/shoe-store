@@ -16,4 +16,5 @@ urlpatterns = [
     # path('authentication/', views.AUTH, name='auth'),
     path('register/', views.HandleRegister, name='register'),
     path('login/', views.HandleLogin, name='login'),
+    path('logout/', views.HandleLogout, name='logout'),
 ] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
