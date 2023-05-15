@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from store_app.models import Product, Categories, Filter_Price, Color, Brand
+from store_app.models import Product, Categories, Filter_Price, Color, Brand, Tag, Contact_us
 
 
 def BASE(request):
@@ -84,3 +84,20 @@ def PRODUCT_DETAIL_PAGE(request, id):
         'prod': prod,
     }
     return render(request, 'Main/product_single.html', context)
+
+def CONTACT_PAGE(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        # print(name, email, subject, message)
+        contact = Contact_us(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message,
+        )
+        contact.save()
+        return redirect('home')
+    return render(request, 'Main/contact.html')
