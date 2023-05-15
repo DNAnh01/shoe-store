@@ -4,7 +4,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib.auth.decorators import login_required
+from cart.cart import Cart
 
 
 def BASE(request):
@@ -162,5 +163,48 @@ def HandleLogout(request):
     # redirect('home')
     return redirect('home')
 
-def CART(request):
+# def CART(request):
+#     return render(request, 'Cart/cart_details.html')
+
+@login_required(login_url="/login/")
+def cart_add(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("home")
+
+
+@login_required(login_url="/login/")
+def item_clear(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.remove(product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/login/")
+def item_increment(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/login/")
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/login/")
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/login/")
+def cart_detail(request):
     return render(request, 'Cart/cart_details.html')

@@ -1,7 +1,7 @@
 {% extends 'Main/base.html' %}
 
 {% block content %}
-
+{% load cart_tag %}
 <!-- Cart Area Start -->
 <div class="cart-main-area pt-100px pb-100px">
     <div class="container">
@@ -22,57 +22,26 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for key,value in request.session.cart.items %}
                                 <tr>
                                     <td class="product-thumbnail">
-                                        <a href="#"><img class="img-responsive ml-15px" src="assets/images/product-image/1.webp" alt="" /></a>
+                                        <a href="#"><img class="img-responsive ml-15px" src="{{value.image}}" alt="" /></a>
                                     </td>
-                                    <td class="product-name"><a href="#">Modern Smart Phone</a></td>
-                                    <td class="product-price-cart"><span class="amount">$60.00</span></td>
+                                    <td class="product-name"><a href="#">{{value.name | truncatewords:8}}</a></td>
+                                    <td class="product-price-cart"><span class="amount">${{value.price}}</span></td>
                                     <td class="product-quantity">
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
+                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="{{value.quantity}} " />
                                         </div>
                                     </td>
-                                    <td class="product-subtotal">$70.00</td>
+                                    <td class="product-subtotal">${{ value.price|multiply:value.quantity }}</td>
                                     <td class="product-remove">
                                         <a href="#"><i class="fa fa-pencil"></i></a>
                                         <a href="#"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img class="img-responsive ml-15px" src="assets/images/product-image/2.webp" alt="" /></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Bluetooth Headphone</a></td>
-                                    <td class="product-price-cart"><span class="amount">$50.00</span></td>
-                                    <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$80.00</td>
-                                    <td class="product-remove">
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img class="img-responsive ml-15px" src="assets/images/product-image/3.webp" alt="" /></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Smart Music Box</a></td>
-                                    <td class="product-price-cart"><span class="amount">$70.00</span></td>
-                                    <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$90.00</td>
-                                    <td class="product-remove">
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
+                                {% endfor %}
+
                             </tbody>
                         </table>
                     </div>
@@ -84,7 +53,7 @@
                                 </div>
                                 <div class="cart-clear">
                                     <button>Update Shopping Cart</button>
-                                    <a href="#">Clear Shopping Cart</a>
+                                    <a href="{% url 'cart_clear' %}">Clear Shopping Cart</a>
                                 </div>
                             </div>
                         </div>
