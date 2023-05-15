@@ -186,10 +186,10 @@
                             </div>
                             <div class="your-order-middle">
                                 <ul>
-                                    <li><span class="order-middle-left">Product Name X 1</span> <span
-                                        class="order-price">$100 </span></li>
-                                    <li><span class="order-middle-left">Product Name X 1</span> <span
-                                        class="order-price">$100 </span></li>
+                                    {% for key,value in request.session.cart.items %}
+                                    <li><span class="order-middle-left">{{value.name | truncatewords:4}} X {{value.quantity}}</span> <span
+                                        class="order-price">${{ value.price|multiply:value.quantity }} </span></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                             <div class="your-order-bottom">
@@ -201,7 +201,7 @@
                             <div class="your-order-total">
                                 <ul>
                                     <li class="order-total">Total</li>
-                                    <li>$100</li>
+                                    <li>${{cart_total_amount}}</li>
                                 </ul>
                             </div>
                         </div>
