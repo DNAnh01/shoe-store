@@ -212,3 +212,11 @@ def cart_detail(request):
 
 def Check_out(request):
     return render(request, 'Cart/checkout.html')
+
+
+def PLACE_ORDER(request):
+    if request.method == "POST":
+        firstname = request.POST.get('firstname')
+
+        print(firstname)
+    return render(request, 'Cart/placeorder.html')
