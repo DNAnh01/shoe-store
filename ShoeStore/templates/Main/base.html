@@ -516,7 +516,10 @@
         </div>
       </div>
       <!-- OffCanvas Wishlist End -->
+
+
       <!-- OffCanvas Cart Start -->
+      {% load cart_tag %}
       <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
         <div class="inner">
           <div class="head">
@@ -525,54 +528,51 @@
           </div>
           <div class="body customScroll">
             <ul class="minicart-product-list">
+
+              {% if request.session.cart|length < 1 %}
+
+              <!-- Empty Cart area start -->
+              <div class="empty-cart-area pb-100px pt-100px">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="cart-heading">
+                                  <h2>Your cart item</h2>
+                              </div>
+                              <div class="empty-text-contant text-center">
+                                  <i class="pe-7s-shopbag"></i>
+                                  <h3>There are no more items in your cart</h3>
+                                  <a class="empty-cart-btn" href="{% url 'products' %}">
+                                      <i class="fa fa-arrow-left"> </i> Continue shopping
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Empty Cart area end -->
+
+              {% else %}
+
+              {% for key,value in request.session.cart.items %}
               <li>
                 <a href="single-product.html" class="image"
                   ><img
-                    src="assets/images/product-image/1.webp"
+                    src="{{value.image}}"
                     alt="Cart product Image"
                 /></a>
                 <div class="content">
                   <a href="single-product.html" class="title"
-                    >Modern Smart Phone</a
+                    >{{value.name | truncatewords:3}}</a
                   >
                   <span class="quantity-price"
-                    >1 x <span class="amount">$18.86</span></span
+                    >{{value.quantity}} x <span class="amount">${{value.price}}</span></span
                   >
-                  <a href="#" class="remove">×</a>
+                  <a href="{% url 'item_clear' key %}" class="remove">×</a>
                 </div>
               </li>
-              <li>
-                <a href="single-product.html" class="image"
-                  ><img
-                    src="assets/images/product-image/2.webp"
-                    alt="Cart product Image"
-                /></a>
-                <div class="content">
-                  <a href="single-product.html" class="title"
-                    >Bluetooth Headphone</a
-                  >
-                  <span class="quantity-price"
-                    >1 x <span class="amount">$43.28</span></span
-                  >
-                  <a href="#" class="remove">×</a>
-                </div>
-              </li>
-              <li>
-                <a href="single-product.html" class="image"
-                  ><img
-                    src="assets/images/product-image/3.webp"
-                    alt="Cart product Image"
-                /></a>
-                <div class="content">
-                  <a href="single-product.html" class="title"
-                    >Smart Music Box</a
-                  >
-                  <span class="quantity-price"
-                    >1 x <span class="amount">$37.34</span></span
-                  >
-                  <a href="#" class="remove">×</a>
-                </div>
-              </li>
+              {% endfor %}
+              {% endif %}
             </ul>
           </div>
           <div class="foot">
