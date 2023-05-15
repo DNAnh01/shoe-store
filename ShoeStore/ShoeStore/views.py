@@ -208,3 +208,7 @@ def cart_clear(request):
 @login_required(login_url="/login/")
 def cart_detail(request):
     return render(request, 'Cart/cart_details.html')
+
+
+def Check_out(request):
+    return render(request, 'Cart/checkout.html')
