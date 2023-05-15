@@ -265,3 +265,7 @@ def PLACE_ORDER(request):
             )
             item.save()
         return render(request, 'Cart/placeorder.html')
+    
+
+def success(request):
+    return render(request, 'Cart/thank_you.html')
