@@ -103,6 +103,8 @@ class Order(models.Model):
     email = models.EmailField(max_length=100) 
     additional_info = models.TextField()
     amount = models.CharField(max_length=100)
+    payment_id = models.CharField(max_length=300,null=True,blank=True)
+    paid = models.BooleanField(default=False,null=True)
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
