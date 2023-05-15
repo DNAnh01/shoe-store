@@ -121,16 +121,16 @@
                                 <span class="new">{{ prod.condition }}</span>
                             </span>
                             <div class="thumb">
-                                <a href="single-product.html" class="image">
+                                <a href="/products/{{prod.id}}" class="image">
                                     <img src="{{ prod.image }}" alt="Product" style="height:250px;"/>
                                     <img class="hover-image" src="{{ prod.image }}" alt="Product" />
                                 </a>
                             </div>
                             <div class="content">
                                 <br>
-                                <span class="category"><a href="#">{{ prod.categories }}</a></span>
+                                <span class="category"><a href="/products/{{prod.id}}">{{ prod.categories }}</a></span>
 
-                                <h5 class="title"><a href="single-product.html">{{prod.name | truncatewords:5}}
+                                <h5 class="title"><a href="/products/{{prod.id}}">{{prod.name | truncatewords:5}}
                                     </a>
                                 </h5>
                                 <span class="price">
