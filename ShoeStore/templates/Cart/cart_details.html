@@ -30,14 +30,20 @@
                                     <td class="product-name"><a href="#">{{value.name | truncatewords:8}}</a></td>
                                     <td class="product-price-cart"><span class="amount">${{value.price}}</span></td>
                                     <td class="product-quantity">
-                                        <div class="cart-plus-minus">
+
+                                        {% comment %} <div class="cart-plus-minus">
                                             <input class="cart-plus-minus-box" type="text" name="qtybutton" value="{{value.quantity}} " />
+                                        </div> {% endcomment %}
+                                        <div class="cart_quantity_button">
+                                            <a class="cart_quantity_up" href="{% url 'item_increment' value.product_id %}"> + </a>
+                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="{{value.quantity}}"/>
+                                            <a class="cart_quantity_down" href="{% url 'item_decrement' value.product_id %}"> - </a>
                                         </div>
                                     </td>
                                     <td class="product-subtotal">${{ value.price|multiply:value.quantity }}</td>
                                     <td class="product-remove">
                                         <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
+                                        <a href="{% url 'item_clear' key %}"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}
